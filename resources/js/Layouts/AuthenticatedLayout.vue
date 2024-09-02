@@ -28,17 +28,18 @@ const showingNavigationDropdown = ref(false);
                         <div
                             class="hidden lg:flex lg:ml-16 lg:items-center lg:justify-center lg:space-x-10 xl:space-x-16 ">
 
-                            <NavLink :href="route('a-propos')" :active="route().current('a-propos')"
+                            <NavLink :href="route('portfolio')" :active="route().current('portfolio')"
                                 class="text-base font-medium text-gray-900 transition-all duration-200  focus:outline-none font-pj hover:text-opacity-50 focus:right-1 focus:right-gray-900 focus:ring-offset-2">
-                                À propos
+                                Portfolio
                             </NavLink>
-                            <NavLink :href="route('projets')" :active="route().current('projets')"
-                                class="text-base font-medium text-gray-900 transition-all duration-200  focus:outline-none font-pj hover:text-opacity-50 focus:right-1 focus:right-gray-900 focus:ring-offset-2">
+                            <NavLink :href="route('projets.index')" :active="route().current('projets.*')" class=" text-base font-medium text-gray-900 transition-all duration-200
+                                focus:outline-none font-pj hover:text-opacity-50 focus:right-1 focus:right-gray-900
+                                focus:ring-offset-2">
                                 Projets
                             </NavLink>
-                            <NavLink :href="route('blog')" :active="route().current('blog')"
+                            <NavLink :href="route('blogs.index')" :active="route().current('blogs.*')"
                                 class="text-base font-medium text-gray-900 transition-all duration-200  focus:outline-none font-pj hover:text-opacity-50 focus:right-1 focus:right-gray-900 focus:ring-offset-2">
-                                Blog
+                                Blogs
                             </NavLink>
                             <NavLink :href="route('contact')" :active="route().current('contact')"
                                 class="text-base font-medium text-gray-900 transition-all duration-200  focus:outline-none font-pj hover:text-opacity-50 focus:right-1 focus:right-gray-900 focus:ring-offset-2">
@@ -114,9 +115,11 @@ const showingNavigationDropdown = ref(false);
                 <div class="pt-2 pb-3 space-y-1">
                     <ResponsiveNavLink :href="route('accueil')" :active="route().current('accueil')"> Accueil
                     </ResponsiveNavLink>
-                    <ResponsiveNavLink :href="route('a-propos')" :active="route().current('a-propos')"> À propos
+                    <ResponsiveNavLink :href="route('portfolio')" :active="route().current('portfolio')"> Portfolio
                     </ResponsiveNavLink>
-                    <ResponsiveNavLink :href="route('projets')" :active="route().current('projets')"> Projets
+                    <ResponsiveNavLink :href="route('projets.index')" :active="route().current('projets.*')"> Projets
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink :href="route('blogs.index')" :active="route().current('blogs.*')"> Blogs
                     </ResponsiveNavLink>
                     <ResponsiveNavLink :href="route('contact')" :active="route().current('contact')"> Contact
                     </ResponsiveNavLink>

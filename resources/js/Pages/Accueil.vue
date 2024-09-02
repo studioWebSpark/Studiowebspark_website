@@ -1,18 +1,48 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import { onMounted } from 'vue';
+import CookieConsent from '@/Components/CookieConsent.vue';
+import Footer from '@/Components/Footer.vue';
+
+
+
+onMounted(() => {
+    var Tawk_API = Tawk_API || {};
+    var Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement('script'),
+            s0 = document.getElementsByTagName('script')[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/66d32f8cea492f34bc0c341a/1i6kh0e8f'; // Remplacez par votre propre ID Tawk.to
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+        
+    })();
+});
 </script>
+<style scoped>
+/* Ajoutez vos styles personnalisés ici */
+#live-chat {
+    z-index: 9999;
+    /* Assurez-vous que le chatbox n'interfère pas avec le contenu */
+}
+</style>
 
 <template>
 
     <Head title="Accueil" />
 
     <AuthenticatedLayout>
+        <CookieConsent />
 
+ 
         <section class="pt-12  sm:pt-16">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="max-w-2xl mx-auto text-center">
-                    <h1 class="px-6 text-lg text-gray-600 font-inter">Smart email campaign builder, made for Developers
+                    <h1 class="px-6 text-lg text-gray-600 font-inter">Smart email campaign builder, made for
+                        Developers
                     </h1>
                     <p
                         class="mt-5 text-4xl font-bold leading-tight text-gray-900 sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight font-pj">
@@ -45,7 +75,8 @@ import { Head } from '@inertiajs/vue3';
                         </a>
                     </div>
 
-                    <p class="mt-8 text-base text-gray-500 font-inter">60 Days free trial · No credit card required</p>
+                    <p class="mt-8 text-base text-gray-500 font-inter">60 Days free trial · No credit card required
+                    </p>
                 </div>
             </div>
 
@@ -62,6 +93,7 @@ import { Head } from '@inertiajs/vue3';
                 </div>
             </div>
         </section>
+
         <section class="py-10 sm:py-16 lg:py-24">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 gap-12 text-center sm:grid-cols-2 md:grid-cols-3 lg:gap-y-16">
@@ -79,7 +111,8 @@ import { Head } from '@inertiajs/vue3';
                             </svg>
                         </div>
                         <h3 class="mt-8 text-lg font-semibold text-black">Secured Payments</h3>
-                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua
+                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
+                            aliqua
                             dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
                     </div>
 
@@ -97,7 +130,8 @@ import { Head } from '@inertiajs/vue3';
                             </svg>
                         </div>
                         <h3 class="mt-8 text-lg font-semibold text-black">Fast & Easy to Load</h3>
-                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua
+                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
+                            aliqua
                             dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
                     </div>
 
@@ -115,7 +149,8 @@ import { Head } from '@inertiajs/vue3';
                             </svg>
                         </div>
                         <h3 class="mt-8 text-lg font-semibold text-black">Light & Dark Version</h3>
-                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua
+                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
+                            aliqua
                             dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
                     </div>
 
@@ -133,7 +168,8 @@ import { Head } from '@inertiajs/vue3';
                             </svg>
                         </div>
                         <h3 class="mt-8 text-lg font-semibold text-black">Light & Dark Version</h3>
-                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua
+                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
+                            aliqua
                             dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
                     </div>
 
@@ -151,7 +187,8 @@ import { Head } from '@inertiajs/vue3';
                             </svg>
                         </div>
                         <h3 class="mt-8 text-lg font-semibold text-black">Fast & Easy to Load</h3>
-                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua
+                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
+                            aliqua
                             dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
                     </div>
 
@@ -169,7 +206,8 @@ import { Head } from '@inertiajs/vue3';
                             </svg>
                         </div>
                         <h3 class="mt-8 text-lg font-semibold text-black">Secured Payments</h3>
-                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua
+                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
+                            aliqua
                             dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
                     </div>
 
@@ -188,7 +226,8 @@ import { Head } from '@inertiajs/vue3';
                             </svg>
                         </div>
                         <h3 class="mt-8 text-lg font-semibold text-black">Light & Dark Version</h3>
-                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua
+                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
+                            aliqua
                             dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
                     </div>
 
@@ -206,7 +245,8 @@ import { Head } from '@inertiajs/vue3';
                             </svg>
                         </div>
                         <h3 class="mt-8 text-lg font-semibold text-black">Secured Payments</h3>
-                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua
+                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
+                            aliqua
                             dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
                     </div>
 
@@ -225,15 +265,16 @@ import { Head } from '@inertiajs/vue3';
                             </svg>
                         </div>
                         <h3 class="mt-8 text-lg font-semibold text-black">Fast & Easy to Load</h3>
-                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua
+                        <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
+                            aliqua
                             dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
                     </div>
                 </div>
             </div>
         </section>
+
+
         <section class=" mb-20">
-
-
             <div class="mt-12 sm:mt-16">
                 <svg class="w-auto h-4 mx-auto text-gray-300" viewBox="0 0 172 16" fill="none" stroke="currentColor"
                     xmlns="http://www.w3.org/2000/svg">
@@ -283,10 +324,12 @@ import { Head } from '@inertiajs/vue3';
             </div>
 
         </section>
+
         <section class="py-10 sm:py-16 lg:py-24">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="max-w-2xl mx-auto text-center">
-                    <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">How does it work?
+                    <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">How does it
+                        work?
                     </h2>
                     <p class="max-w-lg mx-auto mt-4 text-base leading-relaxed text-gray-600">Amet minim mollit non
                         deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
@@ -316,7 +359,8 @@ import { Head } from '@inertiajs/vue3';
                                 class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                                 <span class="text-xl font-semibold text-gray-700"> 2 </span>
                             </div>
-                            <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Build your website
+                            <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Build your
+                                website
                             </h3>
                             <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
                                 aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
@@ -327,7 +371,8 @@ import { Head } from '@inertiajs/vue3';
                                 class="flex items-center justify-center w-16 h-16 mx-auto bg-white border-2 border-gray-200 rounded-full shadow">
                                 <span class="text-xl font-semibold text-gray-700"> 3 </span>
                             </div>
-                            <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Release & Launch
+                            <h3 class="mt-6 text-xl font-semibold leading-tight text-black md:mt-10">Release &
+                                Launch
                             </h3>
                             <p class="mt-4 text-base text-gray-600">Amet minim mollit non deserunt ullamco est sit
                                 aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
@@ -336,10 +381,12 @@ import { Head } from '@inertiajs/vue3';
                 </div>
             </div>
         </section>
+
         <section class="py-10  sm:py-16 lg:py-24">
             <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
                 <div class="max-w-2xl mx-auto text-center">
-                    <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Integrate with apps
+                    <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Integrate with
+                        apps
                     </h2>
                     <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">Amet minim mollit non
                         deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
@@ -363,7 +410,8 @@ import { Head } from '@inertiajs/vue3';
                                 </svg>
                             </div>
                             <p class="text-base leading-relaxed text-gray-600 mt-7">Lorem ipsum dolor sit amet,
-                                consectetur adipis cing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                                consectetur adipis cing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+                            </p>
                         </div>
                     </div>
 
@@ -384,7 +432,8 @@ import { Head } from '@inertiajs/vue3';
                                 </svg>
                             </div>
                             <p class="text-base leading-relaxed text-gray-600 mt-7">Lorem ipsum dolor sit amet,
-                                consectetur adipis cing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                                consectetur adipis cing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+                            </p>
                         </div>
                     </div>
 
@@ -405,7 +454,8 @@ import { Head } from '@inertiajs/vue3';
                                 </svg>
                             </div>
                             <p class="text-base leading-relaxed text-gray-600 mt-7">Lorem ipsum dolor sit amet,
-                                consectetur adipis cing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                                consectetur adipis cing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+                            </p>
                         </div>
                     </div>
 
@@ -426,7 +476,8 @@ import { Head } from '@inertiajs/vue3';
                                 </svg>
                             </div>
                             <p class="text-base leading-relaxed text-gray-600 mt-7">Lorem ipsum dolor sit amet,
-                                consectetur adipis cing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                                consectetur adipis cing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+                            </p>
                         </div>
                     </div>
 
@@ -447,7 +498,8 @@ import { Head } from '@inertiajs/vue3';
                                 </svg>
                             </div>
                             <p class="text-base leading-relaxed text-gray-600 mt-7">Lorem ipsum dolor sit amet,
-                                consectetur adipis cing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                                consectetur adipis cing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+                            </p>
                         </div>
                     </div>
 
@@ -468,7 +520,8 @@ import { Head } from '@inertiajs/vue3';
                                 </svg>
                             </div>
                             <p class="text-base leading-relaxed text-gray-600 mt-7">Lorem ipsum dolor sit amet,
-                                consectetur adipis cing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+                                consectetur adipis cing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -480,10 +533,12 @@ import { Head } from '@inertiajs/vue3';
                 </div>
             </div>
         </section>
+
         <section class="py-10  sm:py-16 lg:py-24">
             <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
                 <div class="max-w-2xl mx-auto text-center">
-                    <h2 class="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl">Contact us</h2>
+                    <h2 class="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl">Contact us
+                    </h2>
                     <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-500">Amet minim mollit non
                         deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
                 </div>
@@ -539,7 +594,8 @@ import { Head } from '@inertiajs/vue3';
                             <form action="#" method="POST" class="mt-14">
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
                                     <div>
-                                        <label for="" class="text-base font-medium text-gray-900"> Your name </label>
+                                        <label for="" class="text-base font-medium text-gray-900"> Your name
+                                        </label>
                                         <div class="mt-2.5 relative">
                                             <input type="text" name="" id="" placeholder="Enter your full name"
                                                 class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
@@ -556,7 +612,8 @@ import { Head } from '@inertiajs/vue3';
                                     </div>
 
                                     <div>
-                                        <label for="" class="text-base font-medium text-gray-900"> Phone number </label>
+                                        <label for="" class="text-base font-medium text-gray-900"> Phone number
+                                        </label>
                                         <div class="mt-2.5 relative">
                                             <input type="tel" name="" id="" placeholder="Enter your full name"
                                                 class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
@@ -564,7 +621,8 @@ import { Head } from '@inertiajs/vue3';
                                     </div>
 
                                     <div>
-                                        <label for="" class="text-base font-medium text-gray-900"> Company name </label>
+                                        <label for="" class="text-base font-medium text-gray-900"> Company name
+                                        </label>
                                         <div class="mt-2.5 relative">
                                             <input type="text" name="" id="" placeholder="Enter your full name"
                                                 class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
@@ -601,7 +659,8 @@ import { Head } from '@inertiajs/vue3';
                         <img class="w-auto h-9" src="https://cdn.rareblocks.xyz/collection/celebration/images/logo.svg"
                             alt="" />
 
-                        <p class="text-base leading-relaxed text-gray-600 mt-7">Amet minim mollit non deserunt ullamco
+                        <p class="text-base leading-relaxed text-gray-600 mt-7">Amet minim mollit non deserunt
+                            ullamco
                             est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
 
                         <a href="#" title=""
@@ -798,6 +857,22 @@ import { Head } from '@inertiajs/vue3';
             </div>
         </section>
 
+        <section>
+            <div class="container mx-auto p-4">
+                <!-- Contenu de la page -->
+
+                <!-- Chat en direct -->
+                <section>
+                    <div id="live-chat" class="fixed bottom-4 right-4">
+                        <!-- Le script pour le chat sera injecté ici -->
+                    </div>
+                </section>
+            </div>
+        </section>
+        <Footer />
+
+
+        
 
 
 
