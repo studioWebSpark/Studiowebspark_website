@@ -45,15 +45,21 @@ class User extends Authenticatable
         ];
     }
 
-    public function projets()
+    public function projects()
     {
         return $this->hasMany(Project::class);
     }
 
 
-    public function blogs()
+    public function comments()
     {
-        return $this->hasMany(Blog::class);
+        return $this->hasMany(Comment::class);
     }
-    
+
+    // Relation avec les projets likés
+    public function likedProjects()
+    {
+        return $this->belongsToMany(Project::class, 'project_likes')->withTimestamps();
+    }
+
 }

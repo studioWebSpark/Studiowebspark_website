@@ -271,10 +271,10 @@ const previousImage = () => {
                 <div class="grid max-w-md grid-cols-1 mx-auto lg:grid-cols-12 gap-x-6 gap-y-8 lg:max-w-none">
                     <div class="self-center lg:col-span-4">
                         <h1 class="text-3xl font-bold text-gray-900 sm:text-4xl xl:text-5xl">
-                            Hey 👋 I am Brian Jones, writing on NFTs.
+                            Hey 👋 Je suis Mesut
                         </h1>
                         <p class="mt-5 text-base font-normal leading-7 text-gray-500">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vehicula massa in enim luctus.
+                            Développeur web freelance pour les nouveaux entrepreneurs et les petites entreprises.
                         </p>
                         <div class="relative inline-flex mt-9 group">
                             <div
@@ -284,14 +284,14 @@ const previousImage = () => {
                             <a href="#" title=""
                                 class="relative inline-flex items-center justify-center px-8 py-3 sm:text-sm sm:py-3.5 text-base font-semibold text-white transition-all duration-200 bg-indigo-600 border border-transparent rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
                                 role="button">
-                                Read Exclusive Blog
+                                Plus d'infos ?
                             </a>
                         </div>
                     </div>
 
                     <div class="self-end lg:order-last lg:pb-20 lg:col-span-3">
                         <p class="text-xs font-bold tracking-widest text-gray-500 uppercase">
-                            ⚡️ Latest Picks
+                            ⚡️ Mes services
                         </p>
 
                         <div class="mt-6 space-y-6 lg:space-y-8">
@@ -302,7 +302,7 @@ const previousImage = () => {
                                         alt="">
                                     <p class="ml-5 text-base font-bold leading-6 text-gray-900">
                                         <a href="#" title="">
-                                            How a visual artist redefines success in graphic design
+                                            Création de site web & application  
                                             <span class="absolute inset-0" aria-hidden="true"></span>
                                         </a>
                                     </p>
@@ -316,7 +316,7 @@ const previousImage = () => {
                                         alt="">
                                     <p class="ml-5 text-base font-bold leading-6 text-gray-900">
                                         <a href="#" title="">
-                                            How a visual artist redefines success in graphic design
+                                            UI & UX Design
                                             <span class="absolute inset-0" aria-hidden="true"></span>
                                         </a>
                                     </p>
@@ -330,7 +330,7 @@ const previousImage = () => {
                                         alt="">
                                     <p class="ml-5 text-base font-bold leading-6 text-gray-900">
                                         <a href="#" title="">
-                                            How a visual artist redefines success in graphic design
+                                            Réseau social & E-commerce
                                             <span class="absolute inset-0" aria-hidden="true"></span>
                                         </a>
                                     </p>
@@ -349,8 +349,7 @@ const previousImage = () => {
         <section class="py-10  sm:py-16 lg:py-24">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="max-w-2xl mx-auto text-center">
-                    <h2 class="text-2xl font-bold text-gray-800 sm:text-4xl sm:leading-tight">Trusted by world class
-                        companies, design teams & popular designers</h2>
+                    <h2 class="text-2xl font-bold text-gray-800 sm:text-4xl sm:leading-tight">Découvrez nos Valeurs </h2>
                 </div>
 
                 <div
@@ -438,10 +437,7 @@ const previousImage = () => {
                                 category === activeCategory
                                     ? 'text-white bg-black border-black' // Classe pour la catégorie active
                                     : 'text-gray-900 border-gray-200 hover:bg-black hover:text-white hover:border-black focus:bg-black focus:text-white focus:border-black' // Classe pour les autres catégories
-                            ]" role="button"
-                            tabindex="0" 
-                            
-                            >
+                            ]" role="button" tabindex="0">
                             {{ category.name }}
                         </div>
                     </div>

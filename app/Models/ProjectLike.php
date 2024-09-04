@@ -5,11 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Blog extends Model
+class ProjectLike extends Model
 {
     use HasFactory;
+    protected $fillable = ['user_id', 'project_id'];
 
-    protected $fillable = ['user_id', 'title', 'image', 'content'];
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 
     public function user()
     {

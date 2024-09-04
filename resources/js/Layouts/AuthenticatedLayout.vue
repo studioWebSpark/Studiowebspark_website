@@ -32,15 +32,14 @@ const showingNavigationDropdown = ref(false);
                                 class="text-base font-medium text-gray-900 transition-all duration-200  focus:outline-none font-pj hover:text-opacity-50 focus:right-1 focus:right-gray-900 focus:ring-offset-2">
                                 Portfolio
                             </NavLink>
-                            <NavLink :href="route('projets.index')" :active="route().current('projets.*')" class=" text-base font-medium text-gray-900 transition-all duration-200
-                                focus:outline-none font-pj hover:text-opacity-50 focus:right-1 focus:right-gray-900
-                                focus:ring-offset-2">
+                            <NavLink :href="route('projects.index')" :active="route().current('projects.index')"
+                                class="text-base font-medium text-gray-900 transition-all duration-200 focus:outline-none font-pj hover:text-opacity-50 focus:right-1 focus:right-gray-900 focus:ring-offset-2">
                                 Projets
                             </NavLink>
-                            <NavLink :href="route('blogs.index')" :active="route().current('blogs.*')"
+                            <!-- <NavLink :href="route('blogs.index')" :active="route().current('blogs.*')"
                                 class="text-base font-medium text-gray-900 transition-all duration-200  focus:outline-none font-pj hover:text-opacity-50 focus:right-1 focus:right-gray-900 focus:ring-offset-2">
                                 Blogs
-                            </NavLink>
+                            </NavLink> -->
                             <NavLink :href="route('contact')" :active="route().current('contact')"
                                 class="text-base font-medium text-gray-900 transition-all duration-200  focus:outline-none font-pj hover:text-opacity-50 focus:right-1 focus:right-gray-900 focus:ring-offset-2">
                                 Contact
@@ -117,10 +116,11 @@ const showingNavigationDropdown = ref(false);
                     </ResponsiveNavLink>
                     <ResponsiveNavLink :href="route('portfolio')" :active="route().current('portfolio')"> Portfolio
                     </ResponsiveNavLink>
-                    <ResponsiveNavLink :href="route('projets.index')" :active="route().current('projets.*')"> Projets
+                    <ResponsiveNavLink :href="route('projects.index')" :active="route().current('projects.*')">
+                        Projets
                     </ResponsiveNavLink>
-                    <ResponsiveNavLink :href="route('blogs.index')" :active="route().current('blogs.*')"> Blogs
-                    </ResponsiveNavLink>
+                    <!--   <ResponsiveNavLink :href="route('blogs.index')" :active="route().current('blogs.*')"> Blogs
+                    </ResponsiveNavLink> -->
                     <ResponsiveNavLink :href="route('contact')" :active="route().current('contact')"> Contact
                     </ResponsiveNavLink>
                 </div>

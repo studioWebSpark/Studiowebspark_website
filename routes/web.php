@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Foundation\Application;
@@ -24,47 +25,20 @@ Route::get('/portfolio', function () {
 })->name('portfolio');
 
 
-// Route pour afficher la liste des blogs
-Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Resource routes pour les projets (index, create, store, show, edit, update, destroy)
+    Route::resource('projects', ProjectController::class);
+    
 
-// Route pour afficher le formulaire de création d'un blog
-Route::get('/blogs/create', [BlogController::class, 'create'])->name('blogs.create');
+    // Route pour liker un projet
+    Route::post('/projects/{project}/like', [ProjectController::class, 'like'])->name('projects.like');
 
-// Route pour stocker un nouveau blog
-Route::post('/blogs', [BlogController::class, 'store'])->name('blogs.store');
+    // Route pour ajouter un commentaire à un projet
+    Route::post('/projects/{project}/comments', [CommentController::class, 'store'])->name('projects.comments.store');
+});
 
-// Route pour afficher un blog spécifique
-Route::get('/blogs/{blog}', [BlogController::class, 'show'])->name('blogs.show');
-
-// Route pour afficher le formulaire d'édition d'un blog
-Route::get('/blogs/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
-
-// Route pour mettre à jour un blog spécifique
-Route::put('/blogs/{blog}', [BlogController::class, 'update'])->name('blogs.update');
-
-// Route pour supprimer un blog spécifique
-Route::delete('/blogs/{blog}', [BlogController::class, 'destroy'])->name('blogs.destroy');
-
-Route::get('/projets', [ProjectController::class, 'index'])->name('projets.index');
-
-// Route pour afficher le formulaire de création d'un projet
-Route::get('/projets/create', [ProjectController::class, 'create'])->name('projets.create');
-
-// Route pour stocker un nouveau projet
-Route::post('/projets', [ProjectController::class, 'store'])->name('projets.store');
-
-// Route pour afficher un projet spécifique
-Route::get('/projets/{projet}', [ProjectController::class, 'show'])->name('projets.show');
-
-// Route pour afficher le formulaire d'édition d'un projet
-Route::get('/projets/{projet}/edit', [ProjectController::class, 'edit'])->name('projets.edit');
-
-// Route pour mettre à jour un projet spécifique
-Route::put('/projets/{projet}', [ProjectController::class, 'update'])->name('projets.update');
-
-// Route pour supprimer un projet spécifique
-Route::delete('/projets/{projet}', [ProjectController::class, 'destroy'])->name('projets.destroy');
-
+Route::post('/projects/{project}/update-image', [ProjectController::class, 'updateImage']);
+Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 
 Route::get('/contact', function () {
     return Inertia::render('Contact');
