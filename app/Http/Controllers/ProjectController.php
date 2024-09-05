@@ -12,13 +12,20 @@ class ProjectController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
         // Charger les projets avec les relations : utilisateur, commentaires et utilisateurs qui ont commenté, et les likes
         $projects = Project::with(['user', 'comments.user', 'likes'])->get();
+
+        $projects->each(function ($project) use ($user) {
+            // Vérifier si l'utilisateur connecté a liké ce projet
+            $project->isLikedByUser = $project->likes->contains('user_id', $user ? $user->id : null);
+            $project->hasCommentedByUser = $project->comments->contains('user_id', $user ? $user->id : null);
+        });
 
         return inertia('Projects/Index', [
             'projects' => $projects,
             'auth' => [
-                'user' => auth()->user(),
+                'user' => $user,
             ],
         ]);
     }

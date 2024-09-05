@@ -3,29 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function store(Request $request, $projectId)
+    public function store(Request $request, Project $project)
     {
-        // Validation des données du commentaire
-        $request->validate([
-            'content' => 'required|string',
+        // Validation des données reçues
+        $validatedData = $request->validate([
+            'content' => 'required|string|max:1000', // Assurez-vous de bien valider le contenu du commentaire
         ]);
 
-        // Création et enregistrement du commentaire
-        $comment = new Comment([
-            'content' => $request->content,
-            'project_id' => $projectId,
-            'user_id' => auth()->id(),
+        // Création du commentaire et liaison au projet et à l'utilisateur connecté
+        $comment = new Comment();
+        $comment->content = $validatedData['content'];
+        $comment->user_id = auth()->id(); // Récupérer l'ID de l'utilisateur connecté
+        $comment->project_id = $project->id; // Lier le commentaire au projet
+        $comment->save(); // Sauvegarder le commentaire en base de données
+
+        // Retourner le commentaire avec l'utilisateur pour l'affichage dans Vue.js
+        return response()->json([
+            'comment' => $comment->load('user') // Charger l'utilisateur associé au commentaire
         ]);
-        
+    }
 
-        // Charger la relation user pour renvoyer l'utilisateur avec le commentaire
-        $comment->load('user'); // Assurez-vous que la relation 'user' est définie dans le modèle Comment
+    public function destroy(Project $project, Comment $comment)
+    {
+        // Vérifier que l'utilisateur est bien l'auteur du commentaire
+        if ($comment->user_id !== auth()->id()) {
+            return response()->json(['error' => 'Unauthorized'], 403);
+        }
 
-        // Retourner le commentaire avec l'utilisateur sous forme de JSON
-        return response()->json($comment);
+        // Supprimer le commentaire
+        $comment->delete();
+
+        return response()->json(['success' => true]);
     }
 }

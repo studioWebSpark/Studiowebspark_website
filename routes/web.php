@@ -25,20 +25,29 @@ Route::get('/portfolio', function () {
 })->name('portfolio');
 
 
+
+// Routes protégées par le middleware auth pour les actions sensibles
 Route::middleware(['auth', 'verified'])->group(function () {
-    // Resource routes pour les projets (index, create, store, show, edit, update, destroy)
-    Route::resource('projects', ProjectController::class);
-    
+    // Routes protégées pour la gestion complète des projets
+    Route::resource('projects', ProjectController::class); // Tout sauf index et show
+
 
     // Route pour liker un projet
     Route::post('/projects/{project}/like', [ProjectController::class, 'like'])->name('projects.like');
 
     // Route pour ajouter un commentaire à un projet
     Route::post('/projects/{project}/comments', [CommentController::class, 'store'])->name('projects.comments.store');
+
+    // Route pour mettre à jour l'image d'un projet
+    Route::post('/projects/{project}/update-image', [ProjectController::class, 'updateImage'])->name('projects.update-image');
+
+    // Route pour supprimer un projet
+    Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+
+    Route::delete('/projects/{project}/comments/{comment}', [CommentController::class, 'destroy'])
+        ->name('projects.comments.destroy');
 });
 
-Route::post('/projects/{project}/update-image', [ProjectController::class, 'updateImage']);
-Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
 
 Route::get('/contact', function () {
     return Inertia::render('Contact');
