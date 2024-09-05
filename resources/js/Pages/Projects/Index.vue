@@ -1,6 +1,6 @@
 <script setup>
 import { usePage } from '@inertiajs/vue3';
-import { ref, reactive } from 'vue';
+import { ref, reactive , onMounted , onBeforeUnmount } from 'vue';
 import axios from 'axios';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import CookieConsent from '@/Components/CookieConsent.vue';
@@ -9,6 +9,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 const { props } = usePage();
 const projects = reactive(props.projects || []); // Initialiser projects comme un tableau vide par défaut
 const user = props.auth.user;
+
 
 const commentContent = ref('');
 const showCommentBox = ref(null); // To control which project's comment box is shown
@@ -187,148 +188,280 @@ const createProject = () => {
 };
 
 
-function redirectToLogin() {
+/* function redirectToLogin() {
     alert('Veuillez vous inscrire ou vous connecter pour liker ou commenter.');
     window.location.href = '/register'; // Redirection vers la page de connexion
-}
+} */
+
+const page = ref(1);
+const loading = ref(false);
+
+// Référence à l'élément sentinelle pour l'IntersectionObserver
+const loadMoreTrigger = ref(null);
+
+// Fonction pour charger des projets (remplacer cette fonction par un appel API réel)
+const fetchProjects = async (pageNumber) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve([
+                { id: pageNumber * 10 + 1, user: { name: 'Utilisateur ' + pageNumber }, image: 'image_url' },
+                { id: pageNumber * 10 + 2, user: { name: 'Utilisateur ' + pageNumber }, image: 'image_url' }
+                // Ajouter plus de projets ici
+            ]);
+        }, 1000);
+    });
+};
+
+// Charger les projets
+const loadProjects = async () => {
+    if (loading.value) return; // Empêche un double chargement
+    loading.value = true;
+
+    try {
+        const newProjects = await fetchProjects(page.value);
+        projects.value = [...projects.value, ...newProjects]; // Ajouter les nouveaux projets
+        page.value++; // Passer à la page suivante
+    } catch (error) {
+        console.error('Erreur lors du chargement des projets :', error);
+    } finally {
+        loading.value = false;
+    }
+};
+
+// IntersectionObserver pour charger plus de projets
+let observer;
+const onIntersection = (entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            loadProjects(); // Charger plus de projets lorsque la sentinelle est visible
+        }
+    });
+};
+
+onMounted(() => {
+    // Configurer l'observateur d'intersection
+    const options = {
+        root: null, // Utilise la fenêtre de vue par défaut
+        rootMargin: '0px',
+        threshold: 1.0 // Déclenchement lorsque 100% de l'élément est visible
+    };
+
+    // Observer quand la dernière partie de la section "Projets" est visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const actualitesSection = document.querySelector('.actualites-section');
+            if (entry.isIntersecting) {
+                // Si l'élément est visible, enlever la classe sticky de la section "Actualités"
+                actualitesSection.classList.remove('sticky');
+            } else {
+                // Si l'élément n'est pas visible, ajouter la classe sticky
+                actualitesSection.classList.add('sticky');
+            }
+        });
+    }, options);
+
+    // Cibler le dernier élément du projet pour déclencher l'observateur
+    const lastProject = document.querySelector('.projets-section .projet:last-child');
+    if (lastProject) {
+        observer.observe(lastProject);
+    }
+});
 
 </script>
 
 <template>
     <AuthenticatedLayout>
         <CookieConsent />
-        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center mb-6">
-                <h1 class="text-3xl font-bold">Mes Projets</h1>
-                <!-- Bouton pour ajouter un projet -->
-                <button @click="handleCreateProject"
-                    class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600">
-                    Ajouter un Projet
-                </button>
+        <div>
+            Titre
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 max-w-7xl mx-auto py-7 sm:px-6 lg:px-8 ">
+
+            <!-- Colonne de gauche -->
+            <div class="profile-section  hidden lg:block bg-white p-4 shadow-md rounded-lg h-[700px] ">
+
+                <!-- Ajoute ici les informations utilisateur ou autre contenu de la colonne gauche -->
+                <h2 class="font-bold text-lg">Mon Profil</h2>
+                <p class="text-gray-600">Mes informations...</p>
+
             </div>
 
-            <!-- Liste des projets -->
-            <div v-if="projects.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div v-for="project in projects" :key="project.id" class="bg-white shadow-md rounded-lg p-4 h-auto">
-                    <p class="text-gray-500 mb-2">
-                        Projet créé par :
-                        <strong v-if="project.user">{{ project.user.name }} </strong>
-                    </p>
+            <div class="projets-section lg:col-span-2  custom-scrollbar">
+                <!-- Liste des projets -->
+                <div v-if="projects.length > 0" class="flex flex-col space-y-4  ">
+                    <div v-for="project in projects" :key="project.id"
+                        class="bg-white shadow-md rounded-lg p-4 w-full sm:w-[555px] mx-auto">
+                        <p class="text-gray-500 mb-2">
+                            Projet créé par :
+                            <strong v-if="project.user">{{ project.user.name }} </strong>
+                        </p>
 
-                    <div class="relative ">
-                        <!-- Bouton des trois petits points -->
-                        <button @click="toggleMenu(project.id)"
-                            class="text-gray-500 hover:text-gray-700 absolute bottom-0 right-2">
-                            &#x2022;&#x2022;&#x2022;
-                        </button>
+                        <div class="relative ">
+                            <!-- Bouton des trois petits points -->
+                            <button @click="toggleMenu(project.id)"
+                                class="text-gray-500 hover:text-gray-700 absolute bottom-0 right-2">
+                                &#x2022;&#x2022;&#x2022;
+                            </button>
 
-                        <!-- Menu contextuel pour modifier/supprimer -->
-                        <div v-if="showMenu === project.id"
-                            class="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg z-10">
-                            <div class="p-2">
-                                <button @click="editProject(project.id)"
-                                    class="block w-full text-left text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-100">
-                                    Modifier
-                                </button>
-                               
-                                <button @click="deleteProject(project.id)"
-                                    class="block w-full text-left text-red-600 px-4 py-2 rounded-lg hover:bg-red-100">
-                                    Supprimer
-                                </button>
+                            <!-- Menu contextuel pour modifier/supprimer -->
+                            <div v-if="showMenu === project.id"
+                                class="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg z-10">
+                                <div class="p-2">
+                                    <button @click="editProject(project.id)"
+                                        class="block w-full text-left text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-100">
+                                        Modifier
+                                    </button>
+
+                                    <button @click="deleteProject(project.id)"
+                                        class="block w-full text-left text-red-600 px-4 py-2 rounded-lg hover:bg-red-100">
+                                        Supprimer
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Titre du projet avec "Afficher plus" -->
-                    <h3 class="text-xl font-semibold">
-                        {{ project.showFullDescription ? project.title : truncatedDescription(project.title) }}
+                        <!-- Titre du projet avec "Afficher plus" -->
+                        <h3 class="text-xl font-semibold">
+                            {{ project.showFullDescription ? project.title : truncatedDescription(project.title) }}
 
-                    </h3>
-                    <p class="text-gray-700 mb-4">
-                        <!-- Affichage conditionnel de la description -->
-                        <span v-if="project.showFullDescription">{{ project.description }}</span>
-                        <span v-else>{{ truncatedDescription(project.description) }}</span>
+                        </h3>
+                        <p class="text-gray-700 mb-4">
+                            <!-- Affichage conditionnel de la description -->
+                            <span v-if="project.showFullDescription">{{ project.description }}</span>
+                            <span v-else>{{ truncatedDescription(project.description) }}</span>
 
-                        <!-- Bouton "plus" ou "moins" pour basculer entre tronqué et complet -->
-                        <span @click="toggleDescription(project)" class="text-blue-500 cursor-pointer">
-                            {{ project.showFullDescription ? '...moins' : '...plus' }}
-                        </span>
-                    </p>
+                            <!-- Bouton "plus" ou "moins" pour basculer entre tronqué et complet -->
+                            <span @click="toggleDescription(project)" class="text-blue-500 cursor-pointer">
+                                {{ project.showFullDescription ? '...moins' : '...plus' }}
+                            </span>
+                        </p>
 
-                    <!-- Image centrée avec taille fixe -->
-                    <img :src="`/storage/${project.image}`" alt="Project Image"
-                        class="w-full h-64 object-cover mb-4 rounded-lg mx-auto" v-if="project.image" />
+                        <!-- Image centrée avec taille fixe -->
+                        <img :src="`/storage/${project.image}`" alt="Project Image"
+                            class="w-full h-64 object-cover mb-4 rounded-lg mx-auto" v-if="project.image" />
 
-                    <!-- Like et Comment -->
-                    <div class="flex justify-between items-center">
-                        <div class="relative" @mouseover="showTooltip(project)" @mouseleave="hideTooltip(project)">
+                        <!-- Like et Comment -->
+                        <div class="flex justify-between items-center">
+                            <div class="relative" @mouseover="showTooltip(project)" @mouseleave="hideTooltip(project)">
 
 
-                            <!-- Bouton like avec icône de cœur -->
-                            <button @click="likeProject(project)" class="flex items-center space-x-2">
-                                <!-- Changement de l'icône et de la couleur selon l'état du like -->
+                                <!-- Bouton like avec icône de cœur -->
+                                <button @click="likeProject(project)" class="flex items-center space-x-2">
+                                    <!-- Changement de l'icône et de la couleur selon l'état du like -->
+                                    <i
+                                        :class="[project.isLikedByUser ? 'fa-regular fa-heart ' : 'fa-solid fa-heart text-red-500']"></i>
+                                    <span>{{ project.likes.length || 0 }}</span>
+                                    <span>J'aime</span>
+                                </button>
+
+
+                                <!-- Tooltip pour les utilisateurs qui ont liké -->
+                                <div v-if="project.likes.length > 0"
+                                    class="absolute bg-white border rounded shadow-md p-2 w-64 hidden tooltip"
+                                    :id="`tooltip-${project.id}`">
+                                    <strong>Aimé par :</strong>
+                                    <ul>
+                                        <li v-for="like in project.likes" :key="like.id">{{ like.name }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                            <button @click="toggleCommentBox(project.id)" class="flex items-center space-x-2">
                                 <i
-                                    :class="[project.isLikedByUser ? 'fa-regular fa-heart ' : 'fa-solid fa-heart text-red-500']"></i>
-                                <span>{{ project.likes.length || 0 }}</span>
-                                <span>J'aime</span>
+                                    :class="[project.hasCommentedByUser ? 'fa-regular fa-comment text-blue-500' : 'fa-regular fa-comment']"></i>
+                                <span>{{ project.comments.length || 0 }}</span>
+                                <span>Commentaires</span>
                             </button>
-
-                            <!-- <button v-else @click="redirectToLogin" class="flex items-center space-x-2">
-                                <i class="fa-regular fa-heart "></i>
-                                <span>{{ project.likes.length || 0 }}</span>
-                                <span>J'aime</span>
-                            </button> -->
-
-                            <!-- Tooltip pour les utilisateurs qui ont liké -->
-                            <div v-if="project.likes.length > 0"
-                                class="absolute bg-white border rounded shadow-md p-2 w-64 hidden tooltip"
-                                :id="`tooltip-${project.id}`">
-                                <strong>Aimé par :</strong>
-                                <ul>
-                                    <li v-for="like in project.likes" :key="like.id">{{ like.name }}</li>
-                                </ul>
-                            </div>
                         </div>
 
-                        <!-- Comment button avec icône Font Awesome -->
-                        <!-- Bouton Comment avec icône Font Awesome -->
-                        <!-- Bouton Comment avec icône Font Awesome -->
-                        <button @click="toggleCommentBox(project.id)" class="flex items-center space-x-2">
-                            <i
-                                :class="[project.hasCommentedByUser ? 'fa-regular fa-comment text-blue-500' : 'fa-regular fa-comment']"></i>
-                            <span>{{ project.comments.length || 0 }}</span>
-                            <span>Commentaires</span>
-                        </button>
-                    </div>
+                        <!-- Boîte pour ajouter un commentaire -->
+                        <div v-if="showCommentBox === project.id" class="comment-box mt-4">
+                            <input type="text" v-model="commentContent" placeholder="Ajouter un commentaire..."
+                                class="input-comment mb-2 w-full p-2 border rounded">
+                            <button @click="submitComment(project)" class="btn btn-comment">Envoyer</button>
+                        </div>
 
-                    <!-- Boîte pour ajouter un commentaire -->
-                    <div v-if="showCommentBox === project.id" class="comment-box mt-4">
-                        <input type="text" v-model="commentContent" placeholder="Ajouter un commentaire..."
-                            class="input-comment mb-2 w-full p-2 border rounded">
-                        <button @click="submitComment(project)" class="btn btn-comment">Envoyer</button>
-                    </div>
-
-                    <!-- Section des commentaires (affichés uniquement si on clique sur "Commentaires") -->
-                    <div v-if="showCommentBox === project.id" class="comments mt-4">
-                        <div v-for="comment in project.comments" :key="comment.id" class="mt-2 p-2 border-t">
-                            <strong v-if="comment.user && comment.user.name">{{ comment.user.name }}:</strong>
-                            {{ comment.content }}
-                            <button v-if="comment.user_id === user.id" @click="deleteComment(project, comment)"
-                                class="text-red-500 ml-4">
-                                <i class="fas fa-trash-alt"></i> Supprimer
-                            </button>
+                        <!-- Section des commentaires (affichés uniquement si on clique sur "Commentaires") -->
+                        <div v-if="showCommentBox === project.id" class="comments mt-4">
+                            <div v-for="comment in project.comments" :key="comment.id" class="mt-2 p-2 border-t">
+                                <strong v-if="comment.user && comment.user.name">{{ comment.user.name }}:</strong>
+                                {{ comment.content }}
+                                <button v-if="comment.user_id === user.id" @click="deleteComment(project, comment)"
+                                    class="text-red-500 ml-4">
+                                    <i class="fas fa-trash-alt"></i> Supprimer
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
+                <!-- Alerte si aucun projet -->
+                <div v-else class="text-center py-10">
+                    <p class="text-gray-600 text-xl mb-5">Aucun projet disponible pour le moment.</p>
+                </div>
             </div>
 
-            <!-- Alerte si aucun projet -->
-            <div v-else class="text-center py-10">
-                <p class="text-gray-600 text-xl mb-5">Aucun projet disponible pour le moment.</p>
+            <!-- Colonne de droite -->
+            <div class="actualites-section hidden lg:block bg-white p-4 shadow-md rounded-lg  h-[700px] overflow-auto">
+
+                <!-- Ajoute ici des informations d'actualité ou tout autre contenu de la colonne droite -->
+                <h2 class="font-bold text-lg">Actualités</h2>
+                <p class="text-gray-600">Mes actualités...</p>
             </div>
         </div>
 
-        
+
+
+        <div ref="loadMoreTrigger" class="h-2"></div>
+
     </AuthenticatedLayout>
 </template>
 
+
+<style scoped>
+
+
+body {
+    overflow-x: hidden;
+    /* Empêche le débordement horizontal */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+ .custom-scrollbar::-webkit-scrollbar {
+    width: 0px;
+    /* Cacher la largeur de la barre de défilement */
+}
+
+.custom-scrollbar {
+    scrollbar-width: none;
+    /* Firefox: Cacher la barre de défilement */
+    -ms-overflow-style: none;
+    /* IE et Edge: Cacher la barre de défilement */
+}
+
+/* Rendre la colonne "Mon Profil" sticky */
+.profile-section {
+    position: sticky;
+    top: 20px;
+    /* Elle reste fixée à 20px du haut de l'écran lorsque l'utilisateur défile */
+}
+/* Rendre la section "Actualités" sticky */
+.actualites-section.sticky {
+    position: fixed;
+    top: 20px;
+    width: 250px;
+    /* Adapte cette valeur en fonction de la largeur de ta section */
+}
+
+/* Permettre à la section des projets de défiler */
+.projets-section {
+    overflow-y: auto;
+    height: 100vh;
+    /* Adapte cette hauteur en fonction de tes besoins */
+}
+</style>
