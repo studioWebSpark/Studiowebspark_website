@@ -10,12 +10,12 @@ import Footer from '@/Components/Footer.vue';
 onMounted(() => {
     var Tawk_API = Tawk_API || {};
     var Tawk_LoadStart = new Date();
+    
     (function () {
         var s1 = document.createElement('script'),
             s0 = document.getElementsByTagName('script')[0];
         s1.async = true;
         s1.src = 'https://embed.tawk.to/66d32f8cea492f34bc0c341a/1i6kh0e8f'; // Remplacez par votre propre ID Tawk.to
-        s1.charset = 'UTF-8';
         s1.setAttribute('crossorigin', '*');
         s0.parentNode.insertBefore(s1, s0);
         

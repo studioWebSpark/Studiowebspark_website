@@ -272,23 +272,27 @@ onMounted(() => {
 <template>
     <AuthenticatedLayout>
         <CookieConsent />
-        <div>
-            Titre
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold">Mes Projets</h1>
+
+            <button @click="handleCreateProject"
+                class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600">
+                Ajouter un Projet
+            </button>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 max-w-7xl mx-auto py-7 sm:px-6 lg:px-8 ">
 
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-10 max-w-7xl mx-auto py-7 sm:px-6 lg:px-8">
             <!-- Colonne de gauche -->
-            <div class="profile-section  hidden lg:block bg-white p-4 shadow-md rounded-lg h-[700px] ">
-
+            <div class="profile-section hidden lg:block bg-white p-4 shadow-md rounded-lg h-[700px]">
                 <!-- Ajoute ici les informations utilisateur ou autre contenu de la colonne gauche -->
                 <h2 class="font-bold text-lg">Mon Profil</h2>
                 <p class="text-gray-600">Mes informations...</p>
-
             </div>
 
-            <div class="projets-section lg:col-span-2  custom-scrollbar">
+            <!-- Section Projets -->
+            <div class="projets-section lg:col-span-2 custom-scrollbar overflow-auto">
                 <!-- Liste des projets -->
-                <div v-if="projects.length > 0" class="flex flex-col space-y-4  ">
+                <div v-if="projects.length > 0" class="flex flex-col space-y-4">
                     <div v-for="project in projects" :key="project.id"
                         class="bg-white shadow-md rounded-lg p-4 w-full sm:w-[555px] mx-auto">
                         <p class="text-gray-500 mb-2">
@@ -296,7 +300,7 @@ onMounted(() => {
                             <strong v-if="project.user">{{ project.user.name }} </strong>
                         </p>
 
-                        <div class="relative ">
+                        <div class="relative">
                             <!-- Bouton des trois petits points -->
                             <button @click="toggleMenu(project.id)"
                                 class="text-gray-500 hover:text-gray-700 absolute bottom-0 right-2">
@@ -323,13 +327,12 @@ onMounted(() => {
                         <!-- Titre du projet avec "Afficher plus" -->
                         <h3 class="text-xl font-semibold">
                             {{ project.showFullDescription ? project.title : truncatedDescription(project.title) }}
-
                         </h3>
+
                         <p class="text-gray-700 mb-4">
                             <!-- Affichage conditionnel de la description -->
                             <span v-if="project.showFullDescription">{{ project.description }}</span>
                             <span v-else>{{ truncatedDescription(project.description) }}</span>
-
                             <!-- Bouton "plus" ou "moins" pour basculer entre tronqué et complet -->
                             <span @click="toggleDescription(project)" class="text-blue-500 cursor-pointer">
                                 {{ project.showFullDescription ? '...moins' : '...plus' }}
@@ -343,8 +346,6 @@ onMounted(() => {
                         <!-- Like et Comment -->
                         <div class="flex justify-between items-center">
                             <div class="relative" @mouseover="showTooltip(project)" @mouseleave="hideTooltip(project)">
-
-
                                 <!-- Bouton like avec icône de cœur -->
                                 <button @click="likeProject(project)" class="flex items-center space-x-2">
                                     <!-- Changement de l'icône et de la couleur selon l'état du like -->
@@ -354,10 +355,9 @@ onMounted(() => {
                                     <span>J'aime</span>
                                 </button>
 
-
                                 <!-- Tooltip pour les utilisateurs qui ont liké -->
                                 <div v-if="project.likes.length > 0"
-                                    class="absolute bg-white border rounded shadow-md p-2 w-64 hidden tooltip"
+                                    class="absolute bg-white border rounded shadow-md p-2 w-60 hidden tooltip"
                                     :id="`tooltip-${project.id}`">
                                     <strong>Aimé par :</strong>
                                     <ul>
@@ -365,7 +365,6 @@ onMounted(() => {
                                     </ul>
                                 </div>
                             </div>
-
 
                             <button @click="toggleCommentBox(project.id)" class="flex items-center space-x-2">
                                 <i
@@ -382,7 +381,7 @@ onMounted(() => {
                             <button @click="submitComment(project)" class="btn btn-comment">Envoyer</button>
                         </div>
 
-                        <!-- Section des commentaires (affichés uniquement si on clique sur "Commentaires") -->
+                        <!-- Section des commentaires -->
                         <div v-if="showCommentBox === project.id" class="comments mt-4">
                             <div v-for="comment in project.comments" :key="comment.id" class="mt-2 p-2 border-t">
                                 <strong v-if="comment.user && comment.user.name">{{ comment.user.name }}:</strong>
@@ -396,7 +395,6 @@ onMounted(() => {
                     </div>
                 </div>
 
-
                 <!-- Alerte si aucun projet -->
                 <div v-else class="text-center py-10">
                     <p class="text-gray-600 text-xl mb-5">Aucun projet disponible pour le moment.</p>
@@ -404,35 +402,29 @@ onMounted(() => {
             </div>
 
             <!-- Colonne de droite -->
-            <div class="actualites-section hidden lg:block bg-white p-4 shadow-md rounded-lg  h-[700px] overflow-auto">
-
-                <!-- Ajoute ici des informations d'actualité ou tout autre contenu de la colonne droite -->
+            <div class="profile-section hidden lg:block bg-white p-4 shadow-md rounded-lg h-[700px] overflow-auto">
+                <!-- Actualités -->
                 <h2 class="font-bold text-lg">Actualités</h2>
                 <p class="text-gray-600">Mes actualités...</p>
             </div>
         </div>
 
-
-
         <div ref="loadMoreTrigger" class="h-2"></div>
-
     </AuthenticatedLayout>
 </template>
 
-
 <style scoped>
-
-
 body {
-    overflow-x: hidden;
-    /* Empêche le débordement horizontal */
+    overflow: hidden;
+    /* Empêche le défilement global */
 }
 
 img {
     max-width: 100%;
     height: auto;
 }
- .custom-scrollbar::-webkit-scrollbar {
+
+.custom-scrollbar::-webkit-scrollbar {
     width: 0px;
     /* Cacher la largeur de la barre de défilement */
 }
@@ -443,25 +435,48 @@ img {
     -ms-overflow-style: none;
     /* IE et Edge: Cacher la barre de défilement */
 }
-
+.projets-section {
+    height: calc(100vh - 230px);
+    /* Ajustez la hauteur selon vos besoins, ici 100vh moins un offset */
+    overflow-y: auto;
+    /* Active le défilement vertical */
+}
 /* Rendre la colonne "Mon Profil" sticky */
 .profile-section {
     position: sticky;
     top: 20px;
     /* Elle reste fixée à 20px du haut de l'écran lorsque l'utilisateur défile */
 }
+
 /* Rendre la section "Actualités" sticky */
 .actualites-section.sticky {
     position: fixed;
     top: 20px;
-    width: 250px;
-    /* Adapte cette valeur en fonction de la largeur de ta section */
+    width: 100%;
+    /* Ajuste à la taille disponible */
 }
 
-/* Permettre à la section des projets de défiler */
-.projets-section {
-    overflow-y: auto;
-    height: 100vh;
-    /* Adapte cette hauteur en fonction de tes besoins */
+/* Responsiveness */
+@media (max-width: 1024px) {
+    .projets-section {
+        height: auto;
+        overflow-y: visible;
+    }
+}
+
+@media (max-width: 768px) {
+    .projets-section {
+        height: auto;
+    }
+
+    .actualites-section {
+        display: none;
+        /* Cacher la colonne actualités sur mobile */
+    }
+
+    .profile-section {
+        display: none;
+        /* Cacher la colonne profil sur mobile */
+    }
 }
 </style>

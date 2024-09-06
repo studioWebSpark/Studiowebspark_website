@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Foundation\Application;
@@ -53,6 +54,11 @@ Route::get('/contact', function () {
     return Inertia::render('Contact');
 })->name('contact');
 
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+Route::get('/send-test-email', [ContactController::class, 'sendTestEmail']);
+Route::get('/admin/messages', [MessageController::class, 'index'])->name('admin.messages.index');
+
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
@@ -64,4 +70,4 @@ Route::middleware('auth')->group(function () {
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
