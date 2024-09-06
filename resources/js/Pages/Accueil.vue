@@ -37,20 +37,19 @@ onMounted(() => {
     <AuthenticatedLayout>
         <CookieConsent />
 
- 
+
         <section class="pt-12  sm:pt-16">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="max-w-2xl mx-auto text-center">
-                    <h1 class="px-6 text-lg text-gray-600 font-inter">Smart email campaign builder, made for
-                        Developers
-                    </h1>
+                    <h1 class="px-6 text-lg text-gray-600 font-inter"> Développez votre entreprise avec des sites web et
+                        applications performants</h1>
                     <p
                         class="mt-5 text-4xl font-bold leading-tight text-gray-900 sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight font-pj">
-                        Turn your visitors into profitable
+                        Solutions de développement Web et d'applications adaptées à vos
                         <span class="relative inline-flex sm:inline">
                             <span
                                 class="bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] blur-lg filter opacity-30 w-full h-full absolute inset-0"></span>
-                            <span class="relative"> business </span>
+                            <span class="relative"> besoins </span>
                         </span>
                     </p>
 
@@ -58,7 +57,7 @@ onMounted(() => {
                         <a href="#" title=""
                             class="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-white transition-all duration-200 bg-gray-900 border-2 border-transparent sm:w-auto rounded-xl font-pj hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
                             role="button">
-                            Get more customers
+                            Découvrez mes projets
                         </a>
 
                         <a href="#" title=""
@@ -71,12 +70,12 @@ onMounted(() => {
                                     stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"
                                     stroke-linejoin="round" />
                             </svg>
-                            Watch free demo
+                            Proposez votre projet
                         </a>
                     </div>
 
-                    <p class="mt-8 text-base text-gray-500 font-inter">60 Days free trial · No credit card required
-                    </p>
+                    <p class="mt-8 text-base text-gray-500 font-inter">Première consultation gratuite · Pas de carte de
+                        crédit requise</p>
                 </div>
             </div>
 
@@ -872,7 +871,7 @@ onMounted(() => {
         <Footer />
 
 
-        
+
 
 
 

@@ -17,7 +17,6 @@ class CreateMessagesTable extends Migration
             $table->string('email');
             $table->string('phone')->nullable();
             $table->text('message');
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();  // Inclut created_at et updated_at
         });
     }
@@ -27,9 +26,6 @@ class CreateMessagesTable extends Migration
      */
     public function down(): void
     {
-        Schema::table('messages', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropColumn('user_id');
-        });
+        Schema::dropIfExists('comments');
     }
 }
