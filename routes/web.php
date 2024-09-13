@@ -57,7 +57,8 @@ Route::get('/contact', function () {
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/send-test-email', [ContactController::class, 'sendTestEmail']);
-Route::get('/admin/messages', [MessageController::class, 'index'])->name('admin.messages.index');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
