@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NewsletterSubscriptionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Foundation\Application;
@@ -58,6 +59,12 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 Route::get('/send-test-email', [ContactController::class, 'sendTestEmail']);
 
+Route::post('/newsletter-subscribe', [NewsletterSubscriptionController::class, 'store']);
+
+
+Route::get('/termes-and-privacy', function () {
+    return Inertia::render('TermsAndPrivacy');
+})->name('terms.privacy');
 
 
 Route::middleware('auth')->group(function () {
