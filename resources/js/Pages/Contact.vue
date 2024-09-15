@@ -1,5 +1,5 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Navbar from '@/Components/NavBar.vue';
 import { Head } from '@inertiajs/vue3';
 import CookieConsent from '@/Components/CookieConsent.vue';
 import { useForm } from '@inertiajs/vue3';
@@ -28,18 +28,108 @@ const submitForm = () => {
         }
     });
 };
+
+
+const balloons = [
+    {
+      
+        id: 1,
+        title: 'Une Idée',
+        colorClass: 'bg-blue-500', 
+        textColorClass: 'text-white',
+        top: '20%',
+        left: '0%',
+        
+    },
+    {
+        
+        id: 2,
+        title: 'Un Problème',
+        colorClass: 'bg-red-500', 
+        textColorClass: 'text-white',
+        top: '50%',
+        left: '20%',
+
+    },
+    {
+     
+        id: 3,
+        title: 'Un Projets',
+        colorClass: 'bg-yellow-500', 
+        textColorClass: 'text-white', 
+        top: '10%',
+        left: '50%',
+
+    },
+    {
+        id: 4,
+        title: 'Solution',
+        colorClass: 'bg-green-500', 
+        textColorClass: 'text-white', 
+        top: '80%',
+        left: '10%',
+    },
+    {
+        id: 5,
+        title: 'Solidarité',
+        colorClass: 'bg-purple-500',
+        textColorClass: 'text-white',
+        top: '40%',
+        left: '70%',
+    },
+    {
+        id: 6,
+        title: 'Echange',
+        colorClass: 'bg-orange-500',
+        textColorClass: 'text-white',
+        top: '110%',
+        left: '10%',
+    },
+    {
+        id: 7,
+        title: 'Pro',
+        colorClass: 'bg-gray-500',
+        textColorClass: 'text-white',
+        top: '70%',
+        left: '50%',
+    },
+    {
+        id: 8,
+        title: 'Personnel',
+        colorClass: 'bg-blue-200',
+        textColorClass: 'text-white',
+        top: '100%',
+        left: '70%',
+    },
+    
+   
+];
+
+function getBalloonStyle(balloon) {
+    return {
+        top: balloon.top,
+        left: balloon.left,
+        transform: `translate(-${balloon.left}, -${balloon.top})` // Ajuste le ballon pour qu'il soit centré à la position
+    };
+}
 </script>
 
 <template>
 
-    <Head title="Contactez-nous " />
+    <Head title="Contact">
+        <meta name="description"
+            content="Contactez-nous pour toute question ou demande d'information. Nous sommes là pour vous aider." />
+        <meta property="og:title" content="Contact - Nous contacter" />
+        <meta property="og:description"
+            content="Vous avez une question ou besoin d'information ? Contactez-nous via notre formulaire ou par téléphone." />
+    </Head>
     <CookieConsent />
 
-    <AuthenticatedLayout>
+    <Navbar>
         <CookieConsent />
 
 
-        <section class="py-10 sm:py-16 lg:py-24 bg-cover bg-center">   
+        <section class="py-10 sm:py-16 lg:py-24 bg-cover bg-center">
             <div class="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 md:items-stretch md:grid-cols-2 gap-x-12 lg:gap-x-20 gap-y-10">
                     <div class="flex flex-col justify-between lg:py-5">
@@ -54,11 +144,24 @@ const submitForm = () => {
                                 un
                                 message.</p>
 
-
                         </div>
 
                         <div class="hidden md:mt-auto md:block">
+                            <section class="pt-10 pb-8 overflow-hidden sm:pt-16 lg:pt-24 mb-20">
+                                <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl mb-20">
 
+                                    <div class="relative h-96 balloon-container" id="balloon">
+                                        <div v-for="balloon in balloons" :key="balloon.id"
+                                            class="absolute flex items-center justify-center group cursor-pointer balloon"
+                                            :style="getBalloonStyle(balloon)">
+                                            <div
+                                                :class="`${balloon.colorClass} ${balloon.textColorClass} w-24 h-24 flex items-center justify-center rounded-full font-bold`">
+                                                {{ balloon.title }} <!-- Titre du ballon -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                     </div>
 
@@ -119,59 +222,36 @@ const submitForm = () => {
                         </div>
                     </div>
 
-                    <div class="md:hidden">
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                            <svg class="w-6 h-6 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                        </div>
 
-                        <blockquote class="mt-6">
-                            <p class="text-lg leading-relaxed text-white">You made it so simple. My new site is so much
-                                faster and easier to work with than my old site. I just choose the page, make the change
-                                and
-                                click save.</p>
-                        </blockquote>
 
-                        <div class="flex items-center mt-8">
-                            <img class="flex-shrink-0 object-cover w-10 h-10 rounded-full"
-                                src="https://cdn.rareblocks.xyz/collection/celebration/images/contact/4/avatar.jpg"
-                                alt="" />
-                            <div class="ml-4">
-                                <p class="text-base font-semibold text-white">Jenny Wilson</p>
-                                <p class="mt-px text-sm text-gray-400">Product Designer</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
-    </AuthenticatedLayout>
+    </Navbar>
     <Footer />
 </template>
 
 <style scoped>
+.group:hover .group-hover\:bounce {
+    animation: bounce 1s ease;
+}
 
+.balloon {
+    animation: float 6s ease-in-out infinite;
+
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+
+    50% {
+        transform: translateY(-40px) translateX(50px);
+    }
+
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+}
 </style>

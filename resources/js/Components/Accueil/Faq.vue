@@ -46,10 +46,6 @@ const faqs = [
     }
 ];
 
-// Fonction pour gérer l'affichage du contenu FAQ
-const toggleFAQ = (index) => {
-    activeFAQ.value = activeFAQ.value === index ? null : index;
-};
 
 </script>
 
@@ -64,12 +60,12 @@ const toggleFAQ = (index) => {
             </p>
 
 
-            <!-- Grille des questions et réponses -->
+
             <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 text-left ">
                 <div v-for="(faq, index) in faqs" :key="index"
                     class="bg- p-6 rounded-lg transform transition-transform duration-300 hover:scale-110 hover:rotate-10">
                     <div class="flex items-start">
-                        <!-- Icône de question -->
+
                         <div class="flex-shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-black bg-gray-200  rounded-full"
                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -77,7 +73,7 @@ const toggleFAQ = (index) => {
                                     d="M8 9a3 3 0 016 0c0 1.333-.667 2-2 3-.667.5-1 1-1 2m0 3h.01" />
                             </svg>
                         </div>
-                        <!-- Contenu de la question et réponse -->
+
                         <div class="ml-4">
                             <h3 class="text-lg font-semibold text-black">{{ faq.question }}</h3>
                             <p class="mt-2 text-gray-600">{{ faq.answer }}</p>
@@ -85,19 +81,18 @@ const toggleFAQ = (index) => {
                     </div>
                 </div>
             </div>
-
-            <!-- Bouton de support -->
             <div class="mt-8">
                 <h2 class="text-2xl font-bold mb-5">Vous n'avez pas trouvé la
                     réponse que
                     vous cherchez ?</h2>
 
-                <p class="text-green-600 hover:underline">Vous pouvez discuter avec nous via le
+                <p class="text-green-600">Vous pouvez discuter avec nous via le
                     Live Chat en bas à
                     droite.</p>
-                <a href="/contact" class="hover:underline">Sinon Contactez-nous par le
-                    formulaire de
-                    contact </a>
+                <p>
+                    Sinon <a href="/contact" class="hover:underline"> Contactez-nous</a>
+                </p>
+               
             </div>
         </div>
     </section>

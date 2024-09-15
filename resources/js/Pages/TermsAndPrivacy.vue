@@ -1,6 +1,6 @@
-<script setup >
+<script setup>
 import CookieConsent from '@/Components/CookieConsent.vue';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Navbar from '@/Components/NavBar.vue';
 
 
 
@@ -8,7 +8,22 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
 <template>
 
-<AuthenticatedLayout>
+    <Head title="Termes et Conditions">
+        <meta name="description"
+            content="Lisez nos termes et conditions pour comprendre les règles d'utilisation de notre site et nos services." />
+        <meta property="og:title" content="Termes et Conditions - Règles d'utilisation" />
+        <meta property="og:description"
+            content="Découvrez les règles d'utilisation de notre site et nos conditions générales de vente." />
+        <meta property="og:image" content="URL_DE_VOTRE_IMAGE_OG" />
+        <meta property="og:url" content="URL_DE_VOTRE_PAGE_TERMES" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Termes et Conditions - Règles d'utilisation" />
+        <meta name="twitter:description"
+            content="Veuillez lire attentivement nos termes et conditions avant d'utiliser notre site." />
+        <meta name="twitter:image" content="URL_DE_VOTRE_IMAGE_TWITTER" />
+    </Head>
+
+    <Navbar>
 
         <CookieConsent />
         <div class="min-h-screen  p-6" id="privacy">
@@ -64,9 +79,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
                 </section>
             </div>
         </div>
-    </AuthenticatedLayout>
+    </Navbar>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

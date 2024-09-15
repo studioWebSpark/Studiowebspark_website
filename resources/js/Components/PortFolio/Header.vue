@@ -18,9 +18,9 @@ const imageUrl = `${window.location.origin}/images/file.png`;
                             class="absolute transitiona-all duration-1000 opacity-70 inset-0 bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg filter group-hover:opacity-100 group-hover:duration-200">
                         </div>
 
-                        <a href="#" title=""
+                        <a href="https://www.linkedin.com/in/mesut-kircil-6a029b288/" title="LinkedIn"
                             class="relative inline-flex items-center justify-center px-8 py-3 sm:text-sm sm:py-3.5 text-base font-semibold text-white transition-all duration-200 bg-indigo-600 border border-transparent rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
-                            role="button">
+                            role="button" target="_blank" rel="noopener noreferrer">
                             Plus d'infos ?
                         </a>
                     </div>

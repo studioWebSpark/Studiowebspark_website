@@ -90,7 +90,7 @@ const submitForm = () => {
                 </div>
 
                 <div>
-                    <p class="text-sm font-semibold tracking-widest text-gray-400 uppercase">Compagnie</p>
+                    <p class="text-sm font-semibold tracking-widest text-gray-700 uppercase">Compagnie</p>
 
                     <ul class="mt-6 space-y-4">
                         <li>
@@ -116,7 +116,7 @@ const submitForm = () => {
                 </div>
 
                 <div>
-                    <p class="text-sm font-semibold tracking-widest text-gray-400 uppercase">Aide</p>
+                    <p class="text-sm font-semibold tracking-widest text-gray-700 uppercase">Aide</p>
 
                     <ul class="mt-6 space-y-4">
                         <li>
@@ -134,7 +134,7 @@ const submitForm = () => {
                 </div>
 
                 <div class="col-span-2 md:col-span-1 lg:col-span-2 lg:pl-8">
-                    <p class="text-sm font-semibold tracking-widest text-gray-400 uppercase">Abonnez-vous à la
+                    <p class="text-sm font-semibold tracking-widest text-gray-700 uppercase">Abonnez-vous à la
                         newsletter</p>
 
                     <form @submit.prevent="submitForm" class="mt-6">

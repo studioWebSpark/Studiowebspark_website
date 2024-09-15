@@ -1,23 +1,29 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Navbar from '@/Components/NavBar.vue';
 import { Head } from '@inertiajs/vue3';
 import CookieConsent from '@/Components/CookieConsent.vue';
-import { ref } from 'vue';
 import Footer from '@/Components/Footer.vue';
 import PortfolioHead from '@/Components/PortFolio/Header.vue';
 import Skills from '@/Components/PortFolio/Skills.vue';
-import Balloons from '@/Components/PortFolio/Balloons.vue';
-import Services from '@/Components/PortFolio/Services.vue';
 
-
+// Chargement asynchrone des composants non critiques
+import { defineAsyncComponent } from 'vue';
+const Balloons = defineAsyncComponent(() => import('@/Components/PortFolio/Balloons.vue'));
+const Services = defineAsyncComponent(() => import('@/Components/PortFolio/Services.vue'));
 </script>
 
 <template>
 
-    <Head title="Portfolio" />
+    <Head title="Portfolio">
+        <meta name="description"
+            content="Découvrez mon portfolio, mes compétences et les services que je propose en tant que développeur web et d'application." />
+        <meta property="og:title" content="Portfolio - Développeur Web et Application" />
+        <meta property="og:description"
+            content="Découvrez mes projets, mes compétences et les services que je propose pour vos besoins numériques." />
+    </Head>
     <CookieConsent />
 
-    <AuthenticatedLayout>
+    <Navbar>
 
         <PortfolioHead />
 
@@ -27,8 +33,8 @@ import Services from '@/Components/PortFolio/Services.vue';
 
         <Services />
 
-        
+
         <Footer />
 
-    </AuthenticatedLayout>
+    </Navbar>
 </template>

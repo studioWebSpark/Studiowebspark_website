@@ -35,33 +35,13 @@ const balloons = [
                     description: 'Dans cette section, je présente un échantillon de mes projets précédents. Vous y trouverez des exemples concrets de sites web et d’applications que j’ai développés, avec des détails sur les technologies utilisées et les objectifs atteints pour chaque client. Idéal pour avoir un aperçu de mon savoir-faire.'
                 },
                 {
-                    src: '/storage/freelances/projet1/projets.png',
-                    title: 'Site web personnel Partie Projets (inscription requise)',
-                    tech: 'HTML, CSS, JavaScript , Sql',
-                    framework: 'Vue.js , Laravel , MySQL , Tailwind CSS',
-                    description: 'Pour profiter pleinement de cette section, l’inscription est requise. Une fois inscrit, vous pourrez ajouter vos propres projets, les organiser et partager des informations détaillées. Un espace personnel inspiré du modèle LinkedIn, conçu pour vous aider à suivre et présenter votre évolution professionnelle.'
-                },
-                {
                     src: '/storage/freelances/projet1/contact.png',
                     title: 'Site web personnel Partie Contact',
                     tech: 'HTML, CSS, JavaScript , Sql',
                     framework: 'Vue.js , Laravel , MySQL , Tailwind CSS',
                     description: 'Que vous ayez une question, un projet en tête ou que vous souhaitiez simplement échanger, la section Contact vous permet de me joindre directement. Laissez-moi un message et je vous répondrai rapidement pour discuter de la façon dont nous pourrions collaborer.'
                 },
-                {
-                    src: '/storage/freelances/projet1/dashboard.png',
-                    title: 'Site web personnel Partie Dashboard (inscription requise)',
-                    tech: 'HTML, CSS, JavaScript , Sql',
-                    framework: 'Vue.js , Laravel , MySQL , Tailwind CSS',
-                    description: 'Cette section est dédiée aux utilisateurs inscrits. Retrouvez un aperçu global de vos projets, des statistiques, et des informations clés sur votre compte. Le Dashboard est l’endroit où vous pouvez suivre l’évolution de vos actions et avoir une vue d’ensemble de vos activités sur le site.'
-                },
-                {
-                    src: '/storage/freelances/projet1/profil.png',
-                    title: 'Site web personnel Partie Profil (inscription requise)',
-                    tech: 'HTML, CSS, JavaScript , Sql',
-                    framework: 'Vue.js , Laravel , MySQL , Tailwind CSS',
-                    description: 'Accédez à votre profil personnel, modifiez vos informations et ajustez vos préférences. Cette section vous permet de mettre à jour vos compétences, vos projets, et de personnaliser votre expérience sur la plateforme, tout comme vous le feriez sur LinkedIn.'
-                }
+                
             ],
             url: '/portfolio'
         }
@@ -69,7 +49,7 @@ const balloons = [
     // Ajoutez les autres ballons ici en changeant `number` et `colorClass` selon vos besoins
     {
         id: 2,
-        image: 'https://via.placeholder.com/100x100?text=2',
+        image: '/storage/freelances/projet2/Tour.png',
         title: 'Ballon 2',
         colorClass: 'bg-red-500',
         textColorClass: 'text-white',
@@ -77,27 +57,46 @@ const balloons = [
         top: '76%',
         left: '28%',
         project: {
-            title: 'Projet 2',
-            description: 'Description du Projet 2',
+            title: 'Projet Tour (Front-end)',
+            description: 'Réalisation d'/'une agence de voyage en ligne avec un design moderne',
+            // PC
             images: [
-                'https://img.freepik.com/photos-gratuite/vue-verticale-du-celebre-rocher-plage-santa-giulia_268835-3733.jpg?ga=GA1.1.604283763.1719259924',
-                'https://via.placeholder.com/100x100?text=Projet1_Image2',
-                'https://via.placeholder.com/100x100?text=Projet1_Image3'
+                {
+                    src: '/storage/freelances/projet2/Tour.png',
+                    title: 'Site web Tour ',
+                    tech: 'HTML, CSS, JavaScript',
+                    framework: 'Tailwind CSS',
+                    description: 'Avec ce projet, j’ai souhaité mettre en avant mes compétences en design et en intégration web. J’ai créé une interface moderne et intuitive pour une agence de voyage fictive, avec des animations et des effets visuels pour une expérience utilisateur optimale.'
+                },
+                
+
             ],
-            url: '#'
+            url: '/portfolio'
         }
     },
     {
         id: 3,
-        image: 'https://via.placeholder.com/100x100?text=Ballon3',
+        image: '/storage/freelances/projet3/Reseaux.png',
         title: 'Ballon 3',
+        colorClass: 'bg-green-500', // Couleur de fond (Bleu vif)
+        textColorClass: 'text-white', // Couleur du texte (Blanc)
         top: '30%',
         left: '16%',
         project: {
-            title: 'Projet 3',
-            description: 'Description du Projet 3',
-            projectImage: 'https://via.placeholder.com/100x100?text=Projet3',
-            url: '#'
+            title: 'Réseaux Sociaux (Front-end)',
+            description: 'Réalisation d' / ' une application de réseau social en ressemblant à Facebook',
+            // PC
+            images: [
+                {
+                    src: '/storage/freelances/projet3/Reseaux.png',
+                    title: 'Site web Réseaux Sociaux ',
+                    tech: 'HTML, CSS,',
+                    description: 'Réseaux Sociaux est un projet personnel qui m’a permis de mettre en pratique mes compétences en design et en développement web. Inspiré des réseaux sociaux populaires, j’ai créé une interface moderne et fonctionnelle pour une application de partage de contenu en ligne.'
+                },
+
+
+            ],
+            url: '/portfolio'
         }
     },
     {
@@ -490,10 +489,7 @@ button {
 /* Ballons: Responsivité */
 .balloon {
     animation: float 6s ease-in-out infinite;
-    width: 6vw;
-    /* Utilise une largeur relative à la vue pour les rendre adaptables */
-    height: 6vw;
-    font-size: 1.2rem;
+   
 }
 
 /* Masquer les ballons sur les petits écrans */
