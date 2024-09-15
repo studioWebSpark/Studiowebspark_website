@@ -7,7 +7,7 @@
                 <p class="text-sm text-gray-700 mb-4">
                     Nous utilisons des cookies pour améliorer votre expérience. En continuant, vous acceptez notre
                     utilisation des cookies.
-                    <a href="/politique-de-vente" class="text-blue-500 underline hover:text-blue-700">Voir les
+                    <a href="/termes-and-privacy" class="text-blue-500 underline hover:text-blue-700">Voir les
                         politiques de vente</a>.
                 </p>
                 <div class="flex justify-end">

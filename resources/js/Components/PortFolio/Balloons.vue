@@ -6,8 +6,9 @@ import { ref } from 'vue';
 
 const balloons = [
     {
+        //Mobile Tablette
         id: 1,
-        image: 'https://via.placeholder.com/100x100?text=1',
+        image: '/storage/freelances/projet1/accueil.png',
         title: 'Ballon 1',
         colorClass: 'bg-blue-500', // Couleur de fond (Bleu vif)
         textColorClass: 'text-white', // Couleur du texte (Blanc)
@@ -15,26 +16,54 @@ const balloons = [
         top: '20%',
         left: '0%',
         project: {
-            title: 'Projet 1',
-            description: 'Description générale du Projet 1',
+            title: 'Site web personnel ',
+            description: 'Je conçois des sites web et des applications personnalisés, axés sur la performance et l’optimisation de la présence en ligne. Vous découvrirez ici mes réalisations, mes compétences et comment je peux vous aider à concrétiser vos projets digitaux. Explorez les différentes sections pour en savoir plus sur mon parcours et mes services.',
+            // PC
             images: [
                 {
-                    src: '/storage/freelances/2.png',
-                    title: 'Image 1',
-                    description: 'Ceci est la description de l\'image 1 du projet 1.'
+                    src: '/storage/freelances/projet1/accueil.png',
+                    title: 'Site web personnel Partie Accueil',
+                    tech: 'HTML, CSS, JavaScript , Sql',
+                    framework: 'Vue.js , Laravel , MySQL , Tailwind CSS',
+                    description: 'Sur la page d’accueil, vous trouverez une vue d’ensemble de mes services en tant que développeur web. Je propose des solutions adaptées à vos besoins, que ce soit pour la création de sites web, d’applications ou l’amélioration de plateformes existantes.'
                 },
                 {
-                    src: 'https://via.placeholder.com/100x100?text=Projet1_Image2',
-                    title: 'Image 2',
-                    description: 'Ceci est la description de l\'image 2 du projet 1.'
+                    src: '/storage/freelances/projet1/portfolio.png',
+                    title: 'Site web personnel Partie Portfolio',
+                    tech: 'HTML, CSS, JavaScript , Sql',
+                    framework: 'Vue.js , Laravel , MySQL , Tailwind CSS',
+                    description: 'Dans cette section, je présente un échantillon de mes projets précédents. Vous y trouverez des exemples concrets de sites web et d’applications que j’ai développés, avec des détails sur les technologies utilisées et les objectifs atteints pour chaque client. Idéal pour avoir un aperçu de mon savoir-faire.'
                 },
                 {
-                    src: 'https://via.placeholder.com/100x100?text=Projet1_Image3',
-                    title: 'Image 3',
-                    description: 'Ceci est la description de l\'image 3 du projet 1.'
+                    src: '/storage/freelances/projet1/projets.png',
+                    title: 'Site web personnel Partie Projets (inscription requise)',
+                    tech: 'HTML, CSS, JavaScript , Sql',
+                    framework: 'Vue.js , Laravel , MySQL , Tailwind CSS',
+                    description: 'Pour profiter pleinement de cette section, l’inscription est requise. Une fois inscrit, vous pourrez ajouter vos propres projets, les organiser et partager des informations détaillées. Un espace personnel inspiré du modèle LinkedIn, conçu pour vous aider à suivre et présenter votre évolution professionnelle.'
+                },
+                {
+                    src: '/storage/freelances/projet1/contact.png',
+                    title: 'Site web personnel Partie Contact',
+                    tech: 'HTML, CSS, JavaScript , Sql',
+                    framework: 'Vue.js , Laravel , MySQL , Tailwind CSS',
+                    description: 'Que vous ayez une question, un projet en tête ou que vous souhaitiez simplement échanger, la section Contact vous permet de me joindre directement. Laissez-moi un message et je vous répondrai rapidement pour discuter de la façon dont nous pourrions collaborer.'
+                },
+                {
+                    src: '/storage/freelances/projet1/dashboard.png',
+                    title: 'Site web personnel Partie Dashboard (inscription requise)',
+                    tech: 'HTML, CSS, JavaScript , Sql',
+                    framework: 'Vue.js , Laravel , MySQL , Tailwind CSS',
+                    description: 'Cette section est dédiée aux utilisateurs inscrits. Retrouvez un aperçu global de vos projets, des statistiques, et des informations clés sur votre compte. Le Dashboard est l’endroit où vous pouvez suivre l’évolution de vos actions et avoir une vue d’ensemble de vos activités sur le site.'
+                },
+                {
+                    src: '/storage/freelances/projet1/profil.png',
+                    title: 'Site web personnel Partie Profil (inscription requise)',
+                    tech: 'HTML, CSS, JavaScript , Sql',
+                    framework: 'Vue.js , Laravel , MySQL , Tailwind CSS',
+                    description: 'Accédez à votre profil personnel, modifiez vos informations et ajustez vos préférences. Cette section vous permet de mettre à jour vos compétences, vos projets, et de personnaliser votre expérience sur la plateforme, tout comme vous le feriez sur LinkedIn.'
                 }
             ],
-            url: '#'
+            url: '/portfolio'
         }
     },
     // Ajoutez les autres ballons ici en changeant `number` et `colorClass` selon vos besoins
@@ -201,6 +230,7 @@ function getBalloonStyle(balloon) {
 const isModalOpen = ref(false);
 const selectedProject = ref(null);
 const currentImageIndex = ref(0);
+const isImageModalOpen = ref(false);
 
 
 const openModal = (project) => {
@@ -213,16 +243,21 @@ const closeModal = () => {
     isModalOpen.value = false;
 };
 
+const openImageModal = () => {
+    isImageModalOpen.value = true;
+};
+
+// Fermer la modale d'image zoomée
+const closeImageModal = () => {
+    isImageModalOpen.value = false;
+};
+
 const nextImage = () => {
-    if (selectedProject.value && selectedProject.value.images) {
-        currentImageIndex.value = (currentImageIndex.value + 1) % selectedProject.value.images.length;
-    }
+    currentImageIndex.value = (currentImageIndex.value + 1) % selectedProject.value.images.length;
 };
 
 const previousImage = () => {
-    if (selectedProject.value && selectedProject.value.images) {
-        currentImageIndex.value = (currentImageIndex.value - 1 + selectedProject.value.images.length) % selectedProject.value.images.length;
-    }
+    currentImageIndex.value = (currentImageIndex.value - 1 + selectedProject.value.images.length) % selectedProject.value.images.length;
 };
 
 
@@ -237,7 +272,7 @@ const previousImage = () => {
                 <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">Je crée des sites web et des
                     applications sur mesure, alliant design moderne et performance pour optimiser la présence en ligne
                     et la productivité de mes clients.</p>
-                <p class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-gray-900 transition-all duration-200 border-2 border-gray-200 rounded-md mt-9 hover:bg-gray-900 hover:text-white hover:border-gray-900 focus:bg-gray-900 focus:text-white focus:border-gray-900"
+                <p class="hidden lg:inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-gray-900 transition-all duration-200 border-2 border-gray-200 rounded-md mt-9 hover:bg-gray-900 hover:text-white hover:border-gray-900 focus:bg-gray-900 focus:text-white focus:border-gray-900"
                     role="button">
                     Cliquez sur les ballons colorés pour voir mes projets
                 </p>
@@ -255,70 +290,126 @@ const previousImage = () => {
             </div>
         </div>
 
-        <!-- Contenu alternatif pour mobile -->
-        <div class="alternative-content block hidden md:hidden">
-            <div v-for="balloon in balloons" :key="balloon.id" class="mb-4 p-4 bg-white shadow rounded-lg">
-                <h3 class="text-xl font-bold text-black mb-2">{{ balloon.project.title }}</h3>
-                <img :src="balloon.image" alt="Project Image" class="w-full h-32 object-cover rounded mb-2"
+        <!-- Affichage uniquement pour mobile et tablette -->
+       <div class="container mx-auto px-4 md:hidden">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div v-for="balloon in balloons" :key="balloon.id"
+            class="bg-white rounded-lg shadow-md overflow-hidden">
+            <!-- Titre du projet -->
+            <div class="p-4">
+                <h3 class="text-lg font-bold text-gray-800 mb-2">
+                    {{ balloon.project.title }}
+                </h3>
+
+                <!-- Image du projet -->
+                <img :src="balloon.image" alt="Project Image" class="w-full h-40 object-cover rounded-lg mb-4"
                     loading="lazy" />
-                <p class="text-sm text-gray-600">{{ balloon.project.description }}</p>
-                <a :href="balloon.project.url" class="text-indigo-500 hover:underline mt-2 inline-block">Voir le
-                    projet</a>
+
+                <!-- Description générale du projet -->
+                <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                    {{ balloon.project.description }}
+                </p>
+
+                <!-- Lien pour visiter le projet -->
+                <a :href="balloon.project.url"
+                    class="text-indigo-500 hover:text-indigo-700 underline block text-center">
+                    Voir le projet
+                </a>
             </div>
         </div>
+    </div>
+</div>
+
 
         <!-- Modal -->
-        <transition name="modal-fade">
-            <div v-if="isModalOpen"
-                class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        <transition name="modal-fade ">
+            <div v-if="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
                 @click="closeModal">
-                <div class="modal-content relative flex flex-col md:flex-row bg-white p-6 rounded-lg max-w-5xl mx-auto"
-                    @click.stop>
+                <div class="relative flex flex-col md:flex-row bg-white p-6 rounded-lg max-w-5xl mx-auto" @click.stop>
                     <!-- Bouton de fermeture -->
-                    <button class="modal-close absolute top-2 right-2 text-gray-600 hover:text-red-900"
-                        @click="closeModal">
+                    <button class="absolute top-2 right-2 text-gray-600 hover:text-red-900" @click="closeModal">
                         x
                     </button>
 
                     <!-- Carrousel d'images (positionné à gauche) -->
-                    <div class="relative w-full md:w-1/2">
+                    <div class="relative w-full md:w-1/2 h-80 flex items-center justify-center">
+                        <!-- Image -->
                         <img :src="selectedProject.images[currentImageIndex].src" alt="Project Image"
-                            class="w-full h-60 object-cover rounded-lg mb-4" />
-
-                        <!-- Titre et description de l'image -->
-
+                            class="w-full h-full object-cover rounded-lg mb-4 cursor-pointer" @click="openImageModal" />
 
                         <!-- Boutons de navigation du carrousel -->
                         <div
-                            class="absolute flex justify-between items-center w-full top-1/2 transform -translate-y-1/2 px-4">
-                            <button id="slider-button-left"
-                                class="swiper-button-prev group !p-2 flex justify-center items-center border border-solid border-indigo-600 !w-10 !h-10 transition-all duration-500 rounded-full hover:bg-indigo-600"
-                                @click="previousImage">
-                                <svg class="h-5 w-5 text-indigo-600 group-hover:text-white"
-                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                                    fill="none">
+                            class="absolute flex justify-between items-center w-full top-1/2 transform -translate-y-1/2 px-4 pointer-events-none">
+                            <button @click="previousImage" class="swiper-button-prev pointer-events-auto z-10">
+                                <svg class="h-8 w-8 text-black " xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" viewBox="0 0 16 16" fill="none">
                                     <path d="M10.0002 11.9999L6 7.99971L10.0025 3.99719" stroke="currentColor"
                                         stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </button>
-
-                            <button id="slider-button-right"
-                                class="swiper-button-next group !p-2 flex justify-center items-center border border-solid border-indigo-600 !w-10 !h-10 transition-all duration-500 rounded-full hover:bg-indigo-600"
-                                @click="nextImage">
-                                <svg class="h-5 w-5 text-indigo-600 group-hover:text-white"
-                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                                    fill="none">
+                            <button @click="nextImage" class="swiper-button-next pointer-events-auto z-10">
+                                <svg class="h-8 w-8 text-black" xmlns="http://www.w3.org/2000/svg" width="16"
+                                    height="16" viewBox="0 0 16 16" fill="none">
                                     <path d="M5.99984 4.00012L10 8.00029L5.99748 12.0028" stroke="currentColor"
                                         stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </button>
                         </div>
                     </div>
+
                     <!-- Détails du projet (positionné à droite) -->
-                    <div class="mt-4 pl-6">
-                        <h4 class="text-lg font-bold">{{ selectedProject.images[currentImageIndex].title }}</h4>
-                        <p class="text-sm text-gray-600">{{ selectedProject.images[currentImageIndex].description }}
+                    <div class="mt-4 pl-6 max-h-40  md:w-1/2">
+                        <h4 class="text-lg font-bold text-gray-800 mb-6 text-center">
+                            {{ selectedProject.images[currentImageIndex].title }}
+                        </h4>
+                        <p class="text-sm text-gray-600 leading-relaxed max-h-24">
+                            <span class="font-semibold">Technologies utilisées:</span>
+                            {{ selectedProject.images[currentImageIndex].tech }}
                         </p>
+                        <p class="text-sm text-gray-600 leading-relaxed max-h-24 mb-6 ">
+                            <span class="font-semibold">Framework utilisées: </span>
+                            {{ selectedProject.images[currentImageIndex].framework }}
+                        </p>
+                        <p class="text-sm text-gray-600 leading-relaxed max-h-24 overflow-y-auto">
+                            {{ selectedProject.images[currentImageIndex].description }}
+                        </p>
+                        <a :href="selectedProject.url" class="text-blue-500 hover:text-blue-700 underline">
+                            Visiter le projet
+                        </a>
+
+
+                    </div>
+                </div>
+            </div>
+        </transition>
+
+        <!-- Modal d'agrandissement de l'image -->
+        <transition name="modal-fade">
+            <div v-if="isImageModalOpen"
+                class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+                @click="closeImageModal">
+                <div class="relative w-full max-w-3xl flex items-center justify-center" @click.stop>
+                    <!-- Image -->
+                    <img :src="selectedProject.images[currentImageIndex].src" alt="Project Image"
+                        class="max-w-full max-h-full" @click.stop />
+
+                    <!-- Boutons de navigation du carrousel dans le zoom -->
+                    <div
+                        class="absolute flex justify-between items-center w-full top-1/2 transform -translate-y-1/2 px-4">
+                        <button @click.stop @click="previousImage" class="swiper-button-prev">
+                            <svg class="h-8 w-8 text-black" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 16 16" fill="none">
+                                <path d="M10.0002 11.9999L6 7.99971L10.0025 3.99719" stroke="currentColor"
+                                    stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button @click.stop @click="nextImage" class="swiper-button-next">
+                            <svg class="h-8 w-8 text-black" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                viewBox="0 0 16 16" fill="none">
+                                <path d="M5.99984 4.00012L10 8.00029L5.99748 12.0028" stroke="currentColor"
+                                    stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -357,33 +448,7 @@ const previousImage = () => {
     z-index: 50;
 }
 
-.modal-content {
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    max-height: 600px;
-    background: white;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: row;
 
-}
-.modal-content img {
-    width: 100%;
-    /* Assurer que l'image prend tout l'espace possible */
-    height: auto;
-    /* Maintenir le ratio */
-    max-height: 350px;
-    /* Limiter la hauteur de l'image */
-    border-radius: 0.75rem;
-    /* Bordure arrondie autour de l'image */
-    object-fit: cover;
-    /* Recadrer l'image pour qu'elle occupe l'espace disponible */
-    margin-bottom: 1rem;
-    /* Espace sous l'image */
-}
 
 /* Garde les boutons du carrousel */
 .swiper-button-prev,
@@ -394,32 +459,6 @@ const previousImage = () => {
 }
 
 /* Ajustement des détails du projet */
-.modal-content h3 {
-    font-size: 1.5rem;
-    /* Augmente légèrement la taille du titre */
-    font-weight: bold;
-    color: #333;
-}
-
-.modal-content p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 1.5rem;
-}
-
-.modal-content a {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #007bff;
-    /* Bleu pour le lien */
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.modal-content a:hover {
-    color: #0056b3;
-}
-
 .modal-close {
     position: absolute;
     top: 1rem;
@@ -438,7 +477,7 @@ const previousImage = () => {
 }
 
 button {
-    background: white;
+    
     border: none;
     cursor: pointer;
     font-size: 1.5rem;

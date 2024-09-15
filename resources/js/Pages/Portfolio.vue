@@ -7,6 +7,7 @@ import Footer from '@/Components/Footer.vue';
 import PortfolioHead from '@/Components/PortFolio/Header.vue';
 import Skills from '@/Components/PortFolio/Skills.vue';
 import Balloons from '@/Components/PortFolio/Balloons.vue';
+import Services from '@/Components/PortFolio/Services.vue';
 
 
 </script>
@@ -24,7 +25,7 @@ import Balloons from '@/Components/PortFolio/Balloons.vue';
 
         <Balloons />
 
-        // Services
+        <Services />
 
         
         <Footer />

@@ -8,6 +8,7 @@ import Step from '@/Components/Accueil/Step.vue';
 import Chatbox from '@/Components/Chatbox.vue';
 import Feature from '@/Components/Accueil/Feature.vue';
 import { Head } from '@inertiajs/vue3';
+import Faq from '@/Components/Accueil/Faq.vue';
 
 
 
@@ -31,6 +32,7 @@ import { Head } from '@inertiajs/vue3';
         <Step />
 
         <Chatbox />
+        <Faq />
 
         <Footer />
 

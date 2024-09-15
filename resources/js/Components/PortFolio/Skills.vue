@@ -1,5 +1,8 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted , onUnmounted} from 'vue';
+
+
+
 const categories = [
     {
         name: 'Développement Web - Frontend',
@@ -124,10 +127,26 @@ const categories = [
 const selectedCategory = ref(null);
 const activeCategory = ref(null);
 
+
+const handleResize = () => {
+    isMobile.value = window.innerWidth <= 640; // Définir la largeur max pour les mobiles
+};
+
+onMounted(() => {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+});
+
+onUnmounted(() => {
+    window.removeEventListener('resize', handleResize);
+});
 const selectCategory = (category) => {
     selectedCategory.value = category;
     activeCategory.value = category;
 };
+
+
+const isMobile = ref(false);
 
 </script>
 
@@ -136,42 +155,75 @@ const selectCategory = (category) => {
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="text-center mb-8">
                 <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Mes Compétences</h2>
-                <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">Découvrez mes compétences en
-                    développement web, design, et technologies modernes, que j’utilise pour créer des solutions
-                    digitales sur mesure, optimisées pour la performance et l’innovation.</p>
-                <p class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-gray-900 transition-all duration-200 border-2 border-gray-200 rounded-md mt-9 hover:bg-gray-900 hover:text-white hover:border-gray-900 focus:bg-gray-900 focus:text-white focus:border-gray-900"
+                <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">
+                    Découvrez mes compétences en développement web, design, et technologies modernes, que j’utilise pour
+                    créer des solutions digitales sur mesure, optimisées pour la performance et l’innovation.
+                </p>
+                <p v-if="!isMobile" class="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-gray-900 transition-all duration-200 border-2 border-gray-200 rounded-md mt-9 hover:bg-gray-900 hover:text-white hover:border-gray-900 focus:bg-gray-900 focus:text-white focus:border-gray-900 :hidden"
                     role="button">
                     Cliquez sur une catégorie pour en savoir plus
                 </p>
-                <div class="mt-6 flex flex-wrap justify-center gap-4">
-                    <!-- Boucle sur les catégories -->
+
+                <!-- Affichage pour desktop/tablette -->
+                <div v-if="!isMobile" class="mt-6 flex flex-wrap justify-center gap-4">
                     <div v-for="category in categories" :key="category.name" @click="selectCategory(category)" :class="[
                         'inline-flex items-center justify-center px-8 py-4 text-base font-semibold transition-all duration-200 border-2 rounded-md mt-9 cursor-pointer',
                         category === activeCategory
-                            ? 'text-white bg-black border-black' // Classe pour la catégorie active
-                            : 'text-gray-900 border-gray-200 hover:bg-black hover:text-white hover:border-black focus:bg-black focus:text-white focus:border-black' // Classe pour les autres catégories
+                            ? 'text-white bg-black border-black'
+                            : 'text-gray-900 border-gray-200 hover:bg-black hover:text-white hover:border-black focus:bg-black focus:text-white focus:border-black'
                     ]" role="button" tabindex="0">
                         {{ category.name }}
                     </div>
                 </div>
-            </div>
 
-            <div v-if="selectedCategory"
-                class="grid grid-cols-1 text-center sm:grid-cols-2 lg:grid-cols-4 gap-y-8 sm:gap-12">
-                <!-- Boucle sur les compétences de la catégorie sélectionnée -->
-                <div v-for="skill in selectedCategory.skills" :key="skill.title" class="flex flex-col items-center">
-                    <div :class="`flex items-center justify-center w-20 h-20 mx-auto ${skill.bgColor} rounded-full`">
-                        <img :src="skill.icon" alt="Skill Icon" class="w-9 h-9" />
+                <!-- Affichage pour mobile -->
+                <div v-else class="mt-6">
+                    <div v-for="category in categories" :key="category.name" class="mb-12">
+                        <!-- Augmenter le mb-8 à mb-12 pour plus d'espace -->
+                        <h3 class="text-lg font-semibold text-black mb-4"> <!-- Ajout d'une marge sous le titre -->
+                            {{ category.name }}
+                        </h3>
+                        <div class="grid grid-cols-2 gap-6 mt-6">
+                            <!-- Augmentation du gap pour espacer les compétences -->
+                            <div v-for="skill in category.skills" :key="skill.title" class="flex flex-col items-center">
+                                <img :src="skill.icon" alt="Skill Icon" class="w-12 h-12 mb-4" />
+                                <!-- Agrandissement des icônes et ajout d'une marge en bas -->
+                                <h4 class="text-sm font-semibold mb-2">{{ skill.title }}</h4>
+                                <!-- Ajout de marge sous les titres -->
+                                <p class="text-xs text-gray-600 text-center">{{ skill.description }}</p>
+                                <!-- Centrer le texte et ajuster l'espacement -->
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="mt-8 text-lg font-semibold text-black">{{ skill.title }}</h3>
-                    <p class="mt-4 text-sm text-gray-600">{{ skill.description }}</p>
+                </div>
+                <div v-if="selectedCategory"
+                    class="grid grid-cols-1 text-center sm:grid-cols-2 lg:grid-cols-4 gap-y-8 sm:gap-12 mt-20">
+                    <!-- Boucle sur les compétences de la catégorie sélectionnée -->
+                    <div v-for="skill in selectedCategory.skills" :key="skill.title" class="flex flex-col items-center">
+                        <div
+                            :class="`flex items-center justify-center w-20 h-20 mx-auto ${skill.bgColor} rounded-full`">
+                            <img :src="skill.icon" alt="Skill Icon" class="w-9 h-9" />
+                        </div>
+                        <h3 class="mt-8 text-lg font-semibold text-black">{{ skill.title }}</h3>
+                        <p class="mt-4 text-sm text-gray-600">{{ skill.description }}</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
 </template>
 
 <style scoped>
+@media (max-width: 640px) {
+    h3 {
+        font-size: 1.25rem;
+        /* Augmenter légèrement la taille des titres des catégories sur mobile */
+    }
 
+    img {
+        width: 3rem;
+        /* Agrandir les icônes pour plus de visibilité */
+        height: 3rem;
+    }
+}
 </style>

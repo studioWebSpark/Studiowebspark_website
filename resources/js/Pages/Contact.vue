@@ -5,6 +5,7 @@ import CookieConsent from '@/Components/CookieConsent.vue';
 import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import ToastNotification from '@/Components/ToastNotification.vue';
+import Footer from '@/Components/Footer.vue';
 
 const form = useForm({
     name: '',
@@ -38,16 +39,20 @@ const submitForm = () => {
         <CookieConsent />
 
 
-        <section class="py-10 sm:py-16 lg:py-24">
+        <section class="py-10 sm:py-16 lg:py-24 bg-cover bg-center">   
             <div class="max-w-6xl px-4 mx-auto sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 md:items-stretch md:grid-cols-2 gap-x-12 lg:gap-x-20 gap-y-10">
                     <div class="flex flex-col justify-between lg:py-5">
                         <div>
                             <h2
                                 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:leading-tight lg:text-5xl">
-                                It’s time to build something exciting!</h2>
-                            <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-black">Amet minim mollit non
-                                deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
+                                Contactez-nous pour un
+                                devis
+                                personnalisé</h2>
+                            <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-black"> Vous avez un projet
+                                en tête ? Remplissez le formulaire ci-dessous pour nous envoyer
+                                un
+                                message.</p>
 
 
                         </div>
@@ -60,15 +65,8 @@ const submitForm = () => {
                     <div class="lg:pl-12">
                         <div class="overflow-hidden bg-white rounded-md">
                             <div class="p-6 sm:p-10">
-                                <h1 class="text-4xl font-bold text-center mb-6 text-gray-800">Contactez-nous pour un
-                                    devis
-                                    personnalisé
-                                </h1>
-                                <p class="text-center text-gray-600 mb-8">
-                                    Vous avez un projet en tête ? Remplissez le formulaire ci-dessous pour nous envoyer
-                                    un
-                                    message.
-                                </p>
+                                <h3 class="text-3xl font-bold text-center mb-6 text-gray-800">Envoyez-nous un message
+                                </h3>
 
                                 <form @submit.prevent="submitForm">
                                     <div class="mb-4">
@@ -79,7 +77,7 @@ const submitForm = () => {
                                             placeholder="Votre nom complet" required>
                                         <div v-if="form.errors.name" class="text-red-500 text-sm mt-2">{{
                                             form.errors.name
-                                        }}</div>
+                                            }}</div>
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 font-semibold mb-2" for="email">Adresse
@@ -89,7 +87,7 @@ const submitForm = () => {
                                             placeholder="Votre adresse email" required>
                                         <div v-if="form.errors.email" class="text-red-500 text-sm mt-2">{{
                                             form.errors.email
-                                        }}</div>
+                                            }}</div>
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 font-semibold mb-2" for="phone">Numéro de
@@ -99,7 +97,7 @@ const submitForm = () => {
                                             placeholder="Votre numéro de téléphone" required>
                                         <div v-if="form.errors.phone" class="text-red-500 text-sm mt-2">{{
                                             form.errors.phone
-                                        }}</div>
+                                            }}</div>
                                     </div>
                                     <div class="mb-4">
                                         <label class="block text-gray-700 font-semibold mb-2"
@@ -171,4 +169,9 @@ const submitForm = () => {
             </div>
         </section>
     </AuthenticatedLayout>
+    <Footer />
 </template>
+
+<style scoped>
+
+</style>
